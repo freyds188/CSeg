@@ -1,0 +1,17 @@
+Sound files needed for the application:
+
+1. click.mp3 - UI click sound
+2. cooking_start.mp3 - Sound when cooking begins
+3. cooking_complete.mp3 - Sound when cooking is done
+4. customer_arrive.mp3 - Sound when a new customer arrives
+5. customer_served.mp3 - Sound when serving a customer
+6. rush_hour.mp3 - Sound for rush hour alerts
+7. ingredient_drop.mp3 - Sound when dropping an ingredient
+8. background_music.mp3 - Looping background music
+
+You can download royalty-free sounds from sites like:
+- https://mixkit.co/free-sound-effects/
+- https://freesound.org/
+- https://www.zapsplat.com/
+
+Download the files and place them in this directory with the filenames listed above. 

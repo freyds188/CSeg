@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# Bacsi Frenzy: The Ultimate Food Stall Challenge
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React-based game where you manage a food stall in front of a school, serving students as quickly as possible while managing your resources effectively.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Recipe System**: Follow recipes step-by-step to prepare dishes
+- **Ingredient Management**: Buy ingredients and use them strategically
+- **Time Management**: Cook and serve customers quickly to maximize satisfaction
+- **Progression System**: Unlock new recipes and equipment as you progress
+- **Leaderboard**: Compete for high scores with other players
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository:
+```
+git clone https://github.com/your-username/bacsi-frenzy.git
+cd bacsi-frenzy
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+2. Install dependencies:
+```
+npm install
+```
 
-### `npm test`
+3. Run the development server:
+```
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## How to Play
 
-### `npm run build`
+1. **Select a Recipe**: Choose from available recipes to cook
+2. **Add Ingredients**: Add the required ingredients to the pan in the correct order
+3. **Cook the Dish**: Start cooking when all ingredients are added
+4. **Serve Customers**: Serve the completed dish to waiting customers
+5. **Upgrade Equipment**: Buy better equipment to cook faster
+6. **Earn Money and Score**: Successfully serving customers earns you money and score points
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Game Mechanics
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Customers have limited patience - serve them quickly!
+- Higher customer satisfaction means higher scores
+- Unlock new recipes by achieving good performance
+- Manage your money to buy ingredients and equipment
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technologies Used
 
-### `npm run eject`
+- React
+- TypeScript
+- React Router
+- Styled Components
+- Local Storage for game saving
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Credits
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Game concept and development: Your Name
+- Images: Sources (e.g., created with Pixel Art tools)
+- Special thanks to contributors and testers
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## License
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+MIT License
