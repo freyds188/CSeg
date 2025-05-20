@@ -90,7 +90,7 @@ export const GameProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
       order: randomRecipe,
       patience: 100,
       satisfaction: 100,
-      timeRemaining: 30, // seconds (reduced from 60)
+      timeRemaining: 60, 
       served: false,
     };
   };

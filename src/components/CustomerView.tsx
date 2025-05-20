@@ -13,48 +13,48 @@ import { Customer } from '../types/gameTypes';
 import { useGame } from '../contexts/GameContext';
 import styled from 'styled-components';
 import { playSound, SOUNDS } from '../utils/soundUtils';
+import { 
+  pixelFont, 
+  pixelBorder, 
+  pixelButton, 
+  pixelCard, 
+  pixelProgressBar,
+  pixelImageContainer,
+  pixelTitle,
+  pixelContainer
+} from '../utils/pixelArtStyles';
 
-// Enhanced styling components
 const CustomerContainer = styled.div`
+  ${pixelContainer}
   padding: 0.5rem;
 `;
 
 const CustomerHeader = styled.h2`
+  ${pixelTitle}
   color: #ff8303;
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
   text-align: center;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 `;
 
 const EnhancedCustomerCard = styled(CustomerCard)`
+  ${pixelCard}
   position: relative;
   transform: translateY(0);
   transition: all 0.3s ease;
   border-left: 4px solid #e94560;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, rgba(255, 131, 3, 0.1) 0%, transparent 100%);
-    pointer-events: none;
-  }
+  image-rendering: pixelated;
   
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
 `;
 
 const EnhancedOrderImage = styled(OrderImage)`
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  ${pixelImageContainer}
   transition: transform 0.3s ease;
+  image-rendering: pixelated;
   
   &:hover {
     transform: scale(1.1);
@@ -62,10 +62,11 @@ const EnhancedOrderImage = styled(OrderImage)`
 `;
 
 const TimeRemaining = styled.small<{ urgency: 'low' | 'medium' | 'high' }>`
+  ${pixelFont}
   color: ${props => 
     props.urgency === 'high' ? '#f44336' : 
     props.urgency === 'medium' ? '#ff9800' : 
-    '#aaa'
+    '#000'
   };
   display: block;
   margin-top: 0.3rem;
@@ -73,59 +74,31 @@ const TimeRemaining = styled.small<{ urgency: 'low' | 'medium' | 'high' }>`
 `;
 
 const EnhancedPatienceBar = styled(PatienceBar)`
-  height: 10px;
-  border-radius: 5px;
+  ${pixelProgressBar}
   margin-top: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
 `;
 
 const EnhancedServeButton = styled(ServeButton)`
+  ${pixelButton}
   margin-top: 1rem;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: 0.5s;
-  }
-  
-  &:not(:disabled):hover::after {
-    left: 100%;
-  }
-  
-  &:disabled {
-    opacity: 0.5;
-  }
+  width: 100%;
 `;
 
 const EmptyMessage = styled.p`
-  color: white;
+  ${pixelFont}
+  color: #000;
   text-align: center;
   padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  font-style: italic;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 4px solid #000;
 `;
 
 const RushHourAlert = styled.div`
+  ${pixelFont}
   background-color: rgba(244, 67, 54, 0.2);
   color: #ff8303;
   padding: 0.5rem 1rem;
-  border-radius: 4px;
+  border: 4px solid #000;
   margin-bottom: 1rem;
   text-align: center;
   animation: pulse 1s infinite;
@@ -142,7 +115,7 @@ const UrgencyIndicator = styled.span<{ urgency: 'low' | 'medium' | 'high' }>`
   display: inline-block;
   width: 12px;
   height: 12px;
-  border-radius: 50%;
+  border: 2px solid #000;
   background-color: ${props => 
     props.urgency === 'high' ? '#f44336' : 
     props.urgency === 'medium' ? '#ff9800' : 
@@ -150,6 +123,7 @@ const UrgencyIndicator = styled.span<{ urgency: 'low' | 'medium' | 'high' }>`
   };
   margin-right: 0.5rem;
   vertical-align: middle;
+  image-rendering: pixelated;
 `;
 
 interface CustomerViewProps {

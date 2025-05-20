@@ -18,23 +18,32 @@ import { useGame } from '../contexts/GameContext';
 import styled from 'styled-components';
 import { Ingredient as IngredientType } from '../types/gameTypes';
 import { playSound, SOUNDS } from '../utils/soundUtils';
+import { 
+  pixelFont, 
+  pixelBorder, 
+  pixelButton, 
+  pixelCard, 
+  pixelProgressBar,
+  pixelImageContainer,
+  pixelTitle,
+  pixelContainer
+} from '../utils/pixelArtStyles';
 
 const DraggableIngredient = styled.div<{ 
   available: boolean, 
   isDragging: boolean,
   position?: { x: number, y: number }
 }>`
+  ${pixelBorder}
   width: 80px;
   height: 80px;
-  border-radius: 8px;
-  background-color: ${(props) => (props.available ? '#e94560' : '#888')};
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   cursor: ${(props) => (props.available ? 'grab' : 'not-allowed')};
-  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  box-shadow: ${(props) => props.isDragging ? '0 8px 16px rgba(0, 0, 0, 0.3)' : '0 2px 5px rgba(0, 0, 0, 0.2)'};
+  transition: transform 0.2s ease-in-out;
   transform: ${(props) => props.isDragging ? 'scale(1.1)' : 'scale(1)'};
   opacity: ${(props) => props.isDragging ? '0.8' : '1'};
   z-index: ${(props) => props.isDragging ? '100' : '1'};
@@ -42,25 +51,27 @@ const DraggableIngredient = styled.div<{
   top: ${(props) => props.position ? `${props.position.y}%` : 'auto'};
   left: ${(props) => props.position ? `${props.position.x}%` : 'auto'};
   transform-origin: center;
+  image-rendering: pixelated;
   
   &:hover {
     transform: ${(props) => (props.available && !props.isDragging) ? 'scale(1.05)' : props.isDragging ? 'scale(1.1)' : 'none'};
-    box-shadow: ${(props) => (props.available && !props.isDragging) ? '0 5px 10px rgba(0, 0, 0, 0.2)' : props.isDragging ? '0 8px 16px rgba(0, 0, 0, 0.3)' : 'none'};
   }
 `;
 
 const PanArea = styled(Pan)`
+  ${pixelBorder}
   cursor: pointer;
   width: 220px;
   height: 220px;
   transform: translate(-50%, -50%);
   overflow: visible;
-  border-radius: 50%;
+  border-radius: 0;
   position: relative;
   transition: transform 0.3s ease-in-out;
   background-color: #444;
-  border: 8px solid #777;
+  border: 8px solid #000;
   background-image: none;
+  image-rendering: pixelated;
   
   &:hover {
     transform: translate(-50%, -50%) scale(1.02);
@@ -75,10 +86,12 @@ const PanArea = styled(Pan)`
     color: #999;
     font-weight: bold;
     font-size: 1.5rem;
+    ${pixelFont}
   }
 `;
 
 const EnhancedStove = styled(Stove)`
+  ${pixelBorder}
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -87,8 +100,9 @@ const EnhancedStove = styled(Stove)`
   position: relative;
   background-color: #333;
   background-image: none;
-  border-radius: 12px;
-  border: 2px solid #555;
+  border-radius: 0;
+  border: 8px solid #000;
+  image-rendering: pixelated;
   
   &::after {
     content: 'STOVE';
@@ -99,6 +113,7 @@ const EnhancedStove = styled(Stove)`
     color: #999;
     font-weight: bold;
     font-size: 1.5rem;
+    ${pixelFont}
   }
 `;
 
@@ -109,6 +124,8 @@ const IngredientInPan = styled(DraggableIngredient)`
   cursor: pointer;
   transform: translate(-50%, -50%);
   z-index: 10;
+  image-rendering: pixelated;
+  background-color: transparent;
   
   &:hover {
     transform: scale(1.2);
@@ -117,20 +134,17 @@ const IngredientInPan = styled(DraggableIngredient)`
 `;
 
 const InstructionsCard = styled.div`
-  background-color: #16213e;
-  border-radius: 12px;
-  padding: 1.5rem;
+  ${pixelCard}
   margin-bottom: 1.5rem;
-  color: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: #000;
 `;
 
 const InstructionStep = styled.li<{ completed: boolean }>`
+  ${pixelFont}
   margin: 0.5rem 0;
   padding: 0.5rem;
-  border-radius: 4px;
   background-color: ${props => props.completed ? 'rgba(76, 175, 80, 0.1)' : 'transparent'};
-  color: ${props => props.completed ? '#4caf50' : 'white'};
+  color: ${props => props.completed ? '#4caf50' : '#000'};
   display: flex;
   align-items: center;
   
@@ -142,6 +156,7 @@ const InstructionStep = styled.li<{ completed: boolean }>`
 `;
 
 const RecipeTitle = styled.h2`
+  ${pixelTitle}
   color: #ff8303;
   margin-bottom: 1rem;
   font-size: 1.8rem;
@@ -150,6 +165,7 @@ const RecipeTitle = styled.h2`
 const AnimatedProgressFill = styled(ProgressFill)`
   background: linear-gradient(90deg, #ff8303 0%, #e94560 100%);
   animation: pulse 2s infinite;
+  image-rendering: pixelated;
   
   @keyframes pulse {
     0% {
@@ -169,35 +185,24 @@ const EnhancedRecipeSelection = styled(RecipeSelection)`
 `;
 
 const EnhancedRecipeCard = styled(RecipeCard)`
+  ${pixelCard}
   transition: all 0.3s ease-in-out;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   overflow: hidden;
+  image-rendering: pixelated;
   
   &:hover {
-    box-shadow: ${(props) => (props.unlocked ? '0 10px 20px rgba(255, 131, 3, 0.3)' : 'none')};
-  }
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 5px;
-    background: linear-gradient(90deg, #ff8303, #e94560);
-    transform: ${(props) => (props.unlocked ? 'scaleX(1)' : 'scaleX(0)')};
-    transform-origin: left;
-    transition: transform 0.3s ease-in-out;
+    transform: ${(props) => (props.unlocked ? 'translateY(-5px)' : 'none')};
   }
 `;
 
 const TimeIndicator = styled.div`
+  ${pixelFont}
   font-size: 1.5rem;
   font-weight: bold;
-  color: white;
+  color: #000;
   text-align: center;
   margin: 1rem 0;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 0 #fff;
 `;
 
 // Add this mapping for ingredient colors
@@ -231,14 +236,14 @@ const IngredientDisplay: React.FC<{
       style={{
         width: "50px",
         height: "50px",
-        borderRadius: "10px",
-        backgroundColor: extendedIngredient.color || '#CCCCCC',
+        borderRadius: "0",
+        backgroundColor: "transparent",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         margin: "5px",
         cursor: onClick ? "pointer" : "default",
-        boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+        boxShadow: "none",
         overflow: "hidden",
         ...style,
       }}
@@ -250,11 +255,15 @@ const IngredientDisplay: React.FC<{
           style={{ 
             width: "100%", 
             height: "100%", 
-            objectFit: "cover" 
+            objectFit: "contain" 
           }}
         />
       ) : (
-        <div style={{ fontWeight: "bold", color: "#FFF", textShadow: "1px 1px 1px rgba(0, 0, 0, 0.5)" }}>
+        <div style={{ 
+          fontWeight: "bold", 
+          color: "#000", 
+          textShadow: "1px 1px 0 #fff" 
+        }}>
           {ingredient.name.charAt(0).toUpperCase()}
         </div>
       )}

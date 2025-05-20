@@ -16,7 +16,7 @@ export const initialRecipes: Recipe[] = [
       'Add the beaten egg and mix well',
       'Serve hot'
     ],
-    cookingTime: 30,
+    cookingTime: 10,
     price: 50,
   },
   {
@@ -31,7 +31,7 @@ export const initialRecipes: Recipe[] = [
       'Fry egg sunny side up',
       'Serve together on a plate'
     ],
-    cookingTime: 25,
+    cookingTime: 10,
     price: 45,
   },
   {
@@ -47,7 +47,7 @@ export const initialRecipes: Recipe[] = [
       'Fry egg sunny side up',
       'Serve together on a plate'
     ],
-    cookingTime: 20,
+    cookingTime: 10,
     price: 40,
   },
   {
@@ -64,7 +64,7 @@ export const initialRecipes: Recipe[] = [
       'Fry egg sunny side up',
       'Serve together on a plate'
     ],
-    cookingTime: 35,
+    cookingTime: 10,
     price: 55,
   },
 ];
