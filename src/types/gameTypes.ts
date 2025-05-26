@@ -9,6 +9,7 @@ export interface Recipe {
   id: string;
   name: string;
   image: string;
+  description?: string;
   unlocked: boolean;
   ingredients: string[];
   steps: string[];

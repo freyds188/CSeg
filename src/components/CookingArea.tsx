@@ -234,14 +234,14 @@ const IngredientDisplay: React.FC<{
       className="ingredient-display"
       onClick={onClick}
       style={{
-        width: "50px",
-        height: "50px",
-        borderRadius: "0",
+        width: "100%",
+        height: "100%",
+        borderRadius: "8px",
         backgroundColor: "transparent",
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        margin: "5px",
         cursor: onClick ? "pointer" : "default",
         boxShadow: "none",
         overflow: "hidden",
@@ -249,24 +249,48 @@ const IngredientDisplay: React.FC<{
       }}
     >
       {ingredient.image ? (
-        <img 
-          src={ingredient.image} 
+        <img
+          src={ingredient.image}
           alt={ingredient.name}
-          style={{ 
-            width: "100%", 
-            height: "100%", 
-            objectFit: "contain" 
+          style={{
+            width: "60%",
+            height: "60%",
+            objectFit: "contain",
+            marginBottom: "0.5rem",
+            imageRendering: "pixelated",
           }}
         />
       ) : (
-        <div style={{ 
-          fontWeight: "bold", 
-          color: "#000", 
-          textShadow: "1px 1px 0 #fff" 
-        }}>
-          {ingredient.name.charAt(0).toUpperCase()}
-        </div>
+        <div
+          style={{
+            width: "60%",
+            height: "60%",
+            backgroundColor: extendedIngredient.color || "#fff",
+            borderRadius: "4px",
+            marginBottom: "0.5rem",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            border: "2px solid rgba(0, 0, 0, 0.1)",
+          }}
+        />
       )}
+      <span
+        style={{
+          fontSize: "0.8rem",
+          color: "#fff",
+          textAlign: "center",
+          fontWeight: 500,
+          textShadow: "1px 1px 2px rgba(0, 0, 0, 0.5)",
+          whiteSpace: "nowrap",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          width: "100%",
+          padding: "0 0.25rem",
+        }}
+      >
+        {ingredient.name}
+      </span>
     </div>
   );
 };
@@ -313,7 +337,7 @@ const CookingAreaComponent: React.FC = () => {
     { id: 'garlic', name: 'Garlic', image: '/images/ingredients/garlic.png', color: ingredientColors.garlic },
     { id: 'oil', name: 'Oil', image: '/images/ingredients/oil.png', color: ingredientColors.oil },
     { id: 'pepper', name: 'Pepper', image: '/images/ingredients/pepper.png', color: ingredientColors.pepper },
-    { id: 'tomato', name: 'Tomato', image: '', color: ingredientColors.tomato },
+    { id: 'tomato', name: 'Tomato', image: '/images/ingredients/tomato.png', color: ingredientColors.tomato },
   ];
 
   // Handle mouse movement for dragging

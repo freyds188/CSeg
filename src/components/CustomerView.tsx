@@ -3,13 +3,11 @@ import {
   CustomerCard,
   CustomerOrder,
   OrderImage,
-  OrderDetails,
-  OrderName,
   PatienceBar,
   PatienceFill,
   ServeButton
 } from './styled/GameStyles';
-import { Customer } from '../types/gameTypes';
+import { Customer, Recipe } from '../types/gameTypes';
 import { useGame } from '../contexts/GameContext';
 import styled from 'styled-components';
 import { playSound, SOUNDS } from '../utils/soundUtils';
@@ -45,9 +43,12 @@ const EnhancedCustomerCard = styled(CustomerCard)`
   border-left: 4px solid #e94560;
   overflow: hidden;
   image-rendering: pixelated;
+  background-color: #16213e;
+  padding: 1.5rem;
   
   &:hover {
     transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   }
 `;
 
@@ -55,10 +56,40 @@ const EnhancedOrderImage = styled(OrderImage)`
   ${pixelImageContainer}
   transition: transform 0.3s ease;
   image-rendering: pixelated;
+  width: 80px;
+  height: 80px;
+  border: 4px solid #000;
+  background-color: #0f3460;
+  padding: 0.5rem;
   
   &:hover {
     transform: scale(1.1);
   }
+`;
+
+const OrderDetailsWrapper = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const OrderNameText = styled.h3`
+  margin: 0;
+  color: #ff8303;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+`;
+
+const OrderDescription = styled.p`
+  margin: 0;
+  color: #fff;
+  font-size: 0.9rem;
+  opacity: 0.8;
 `;
 
 const TimeRemaining = styled.small<{ urgency: 'low' | 'medium' | 'high' }>`
@@ -66,11 +97,14 @@ const TimeRemaining = styled.small<{ urgency: 'low' | 'medium' | 'high' }>`
   color: ${props => 
     props.urgency === 'high' ? '#f44336' : 
     props.urgency === 'medium' ? '#ff9800' : 
-    '#000'
+    '#4caf50'
   };
-  display: block;
-  margin-top: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
   font-weight: ${props => props.urgency === 'high' ? 'bold' : 'normal'};
+  font-size: 1rem;
 `;
 
 const EnhancedPatienceBar = styled(PatienceBar)`
@@ -170,16 +204,19 @@ const CustomerView: React.FC<CustomerViewProps> = ({ customers }) => {
               <EnhancedCustomerCard key={customer.id}>
                 <CustomerOrder>
                   <EnhancedOrderImage src={customer.order.image} alt={customer.order.name} />
-                  <OrderDetails>
-                    <OrderName>
+                  <OrderDetailsWrapper>
+                    <OrderNameText>
                       <UrgencyIndicator urgency={urgency} />
                       {customer.order.name}
-                    </OrderName>
+                    </OrderNameText>
+                    <OrderDescription>
+                      {customer.order.description || `A delicious ${customer.order.name.toLowerCase()} made with fresh ingredients`}
+                    </OrderDescription>
                     <TimeRemaining urgency={urgency}>
                       {urgency === 'high' ? '⚠️ ' : ''}
                       Time remaining: {customer.timeRemaining}s
                     </TimeRemaining>
-                  </OrderDetails>
+                  </OrderDetailsWrapper>
                 </CustomerOrder>
                 
                 <EnhancedPatienceBar>

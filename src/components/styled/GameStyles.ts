@@ -125,10 +125,17 @@ export const MenuButton = styled(Button)`
 // Game grid
 export const GameGrid = styled.div`
   display: grid;
-  grid-template-columns: 3fr 1fr;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
   grid-template-rows: 1fr;
   gap: 1rem;
   height: 100%;
+  min-height: 0;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
+  }
 `;
 
 // Cooking area
@@ -140,6 +147,12 @@ export const CookingArea = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  min-height: 0;
+  
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: 1;
+  }
 `;
 
 // Customer area
@@ -151,6 +164,13 @@ export const CustomerArea = styled.div`
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  min-height: 0;
+  
+  @media (max-width: 768px) {
+    grid-column: 1;
+    grid-row: 2;
+    max-height: 300px;
+  }
 `;
 
 // Stove
@@ -181,15 +201,22 @@ export const Pan = styled.div`
 // Ingredients area
 export const IngredientsArea = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 1rem;
   margin-top: 1rem;
+  padding: 0.5rem;
+  overflow-y: auto;
+  max-height: 200px;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  }
 `;
 
 // Ingredient
 export const Ingredient = styled.div<{ available: boolean }>`
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  aspect-ratio: 1;
   border-radius: 8px;
   background-color: ${(props) => (props.available ? '#e94560' : '#888')};
   display: flex;
@@ -198,17 +225,21 @@ export const Ingredient = styled.div<{ available: boolean }>`
   justify-content: center;
   cursor: ${(props) => (props.available ? 'pointer' : 'not-allowed')};
   transition: all 0.2s ease-in-out;
+  padding: 0.5rem;
+  position: relative;
   
   &:hover {
     transform: ${(props) => (props.available ? 'scale(1.05)' : 'none')};
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 `;
 
 // Ingredient image
 export const IngredientImage = styled.img`
-  width: 50px;
-  height: 50px;
+  width: 60%;
+  height: 60%;
   object-fit: contain;
+  margin-bottom: 0.5rem;
 `;
 
 // Ingredient name
@@ -216,7 +247,13 @@ export const IngredientName = styled.span`
   font-size: 0.8rem;
   color: white;
   text-align: center;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
 `;
 
 // Customer card
